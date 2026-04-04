@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="name" content="Zentro - Soluções Digitais que Convertem">
+    <meta name="description" content="Desenvolvimento de sites profissionais com foco em posicionamento e conversão. Hospedagem e domínio gratuitos.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zentro - Soluções Digitais que Convertem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5B4CDA;
+            --primary-dark: #4A3BC7;
+            --secondary: #000000;
+            --accent: #6B5CE8;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --bg: #ffffff;
+            --bg-light: #f8f9fa;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #fff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(91, 76, 218, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(91, 76, 218, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 76, 218, 0.5);        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            background: var(--bg-light);
+            border-radius: 16px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        .portfolio-preview {
+            height: 250px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay a {
+            color: white;
+            font-size: 3rem;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-overlay a:hover {
+            transform: scale(1.1);
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+        }
+        .portfolio-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .portfolio-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .portfolio-link:hover {
+            gap: 1rem;
+            transition: gap 0.3s;
+        }
+
+        /* Pricing/Differential Section */
+        .differential {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .differential-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .differential-card {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .differential-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .differential-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .differential-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .differential-card p {
+            color: var(--text-light);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, #1a1a1a 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%235B4CDA' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .contact .section-header h2,
+        .contact .section-header p {
+            color: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            position: relative;            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p,
+        .contact-card a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary);
+        }
+
+        .hours-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        .hours-list li {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Quote Form */
+        .quote-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .quote-form h3 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-form > p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-method {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-method-option {
+            position: relative;
+        }
+
+        .contact-method-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .contact-method-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .contact-method-option input:checked + .contact-method-label {
+            border-color: var(--primary);
+            background: rgba(91, 76, 218, 0.1);
+            color: var(--primary);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.1rem;        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-email {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-email:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 76, 218, 0.4);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 999;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+            animation: none;        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            background: white;
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 75px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .contact-container {                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contact-method {
+                grid-template-columns: 1fr;
+            }
+
+            .quote-form {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 20 L50 20 L50 50 Z" fill="#5B4CDA"/>
+                        <path d="M20 20 L20 80 L50 80 L50 50 Z" fill="#000000"/>
+                        <path d="M50 50 L80 50 L80 80 L50 80 Z" fill="#5B4CDA"/>
+                        <path d="M20 20 L50 50" stroke="white" stroke-width="8" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                ZENTRO
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#diferenciais">Diferenciais</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-container">
+            <div class="hero-content animate">
+                <h1>Soluções Digitais que <span>Convertem</span></h1>
+                <p>Desenvolvemos sites profissionais com foco em posicionamento e conversão para alavancar o seu negócio. Hospedagem e domínio gratuitos inclusos.</p>
+                <div class="hero-buttons">
+                    <a href="#orcamento" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Solicitar Orçamento
+                    </a>
+                    <a href="#portfolio" class="btn btn-secondary">
+                        <i class="fas fa-eye"></i>
+                        Ver Portfólio
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div style="background: linear-gradient(135deg, #5B4CDA 0%, #000000 100%); padding: 3rem; border-radius: 20px; color: white; text-align: center;">
+                    <i class="fas fa-laptop-code" style="font-size: 8rem; margin-bottom: 2rem; opacity: 0.9;"></i>
+                    <h3 style="font-size: 2rem; margin-bottom: 1rem;">Seu Negócio no Próximo Nível</h3>
+                    <p style="font-size: 1.1rem; opacity: 0.9;">Sites modernos, rápidos e otimizados para converter visitantes em clientes</p>                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Sites Entregues</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Clientes Satisfeitos</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24h</span>
+                    <span class="stat-label">Entrega Rápida</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="servicos">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <h2>O Que Oferecemos</h2>
+                <p>Soluções completas para presença digital do seu negócio</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Design Moderno</h3>
+                    <p>Layouts elegantes e responsivos que se adaptam a qualquer dispositivo e encantam seus visitantes.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Foco em Conversão</h3>
+                    <p>Estratégias de UX/UI pensadas para transformar visitantes em clientes e aumentar suas vendas.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Hospedagem Grátis</h3>
+                    <p>Oferecemos hospedagem e domínio gratuitos via Netlify, ou você pode usar sua própria infraestrutura.</p>
+                </div>                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>SEO Otimizado</h3>
+                    <p>Sites otimizados para mecanismos de busca para melhorar seu posicionamento no Google.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Alta Performance</h3>
+                    <p>Páginas rápidas e otimizadas que proporcionam a melhor experiência para seus usuários.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Suporte Dedicado</h3>
+                    <p>Acompanhamento pós-entrega para garantir que tudo funcione perfeitamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <h2>Portfólio</h2>
+                <p>Conheça alguns dos projetos que desenvolvemos</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item scroll-reveal">
+                    <div class="portfolio-preview">
+                        <iframe src="https://flashcaixa.netlify.app" title="Flash Caixa"></iframe>
+                        <div class="portfolio-overlay">
+                            <a href="https://flashcaixa.netlify.app" target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Flash Caixa</h3>
+                        <p>Sistema de frente de caixa em VBA com foco em economia e simplicidade para pequenos comércios.</p>
+                        <a href="https://flashcaixa.netlify.app" target="_blank" class="portfolio-link">
+                            Visitar Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>                <div class="portfolio-item scroll-reveal">
+                    <div class="portfolio-preview" style="background: linear-gradient(135deg, #000000 0%, #5B4CDA 100%);">
+                        <iframe src="https://gilmar-rocha-reformas.netlify.app" title="Gilmar Rocha Reformas"></iframe>
+                        <div class="portfolio-overlay">
+                            <a href="https://gilmar-rocha-reformas.netlify.app" target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Gilmar Rocha Reformas</h3>
+                        <p>Landing page para profissional de construção civil e reformas com foco em conversão de orçamentos.</p>
+                        <a href="https://gilmar-rocha-reformas.netlify.app" target="_blank" class="portfolio-link">
+                            Visitar Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="portfolio-item scroll-reveal">
+                    <div class="portfolio-preview" style="background: linear-gradient(135deg, #6B5CE8 0%, #5B4CDA 100%);">
+                        <iframe src="https://operacaoaprovacao.netlify.app" title="Operação Aprovação"></iframe>
+                        <div class="portfolio-overlay">
+                            <a href="https://operacaoaprovacao.netlify.app" target="_blank">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Operação Aprovação</h3>
+                        <p>Plataforma de questões comentadas para concursos de carreiras policiais com design focado em vendas.</p>
+                        <a href="https://operacaoaprovacao.netlify.app" target="_blank" class="portfolio-link">
+                            Visitar Site <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Differential Section -->
+    <section class="differential" id="diferenciais">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <h2>Nossos Diferenciais</h2>
+                <p>Por que escolher a Zentro para o seu projeto?</p>
+            </div>
+            <div class="differential-grid">
+                <div class="differential-card scroll-reveal">
+                    <div class="differential-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>                    <h3>Hospedagem Grátis</h3>
+                    <p>Domínio e hospedagem gratuitos via Netlify. Você economiza desde o primeiro dia.</p>
+                </div>
+                <div class="differential-card scroll-reveal">
+                    <div class="differential-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>100% Responsivo</h3>
+                    <p>Seu site perfeito em qualquer dispositivo: desktop, tablet ou smartphone.</p>
+                </div>
+                <div class="differential-card scroll-reveal">
+                    <div class="differential-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Foco em Resultados</h3>
+                    <p>Design estratégico pensado para converter visitantes em clientes reais.</p>
+                </div>
+                <div class="differential-card scroll-reveal">
+                    <div class="differential-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Entrega Rápida</h3>
+                    <p>Seu site pronto em até 7 dias úteis. Agilidade sem comprometer a qualidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contato">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <h2>Entre em Contato</h2>
+                <p>Pronto para transformar sua presença digital? Vamos conversar!</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info scroll-reveal">
+                    <div class="contact-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/5561992560713" target="_blank">(61) 99256-0713</a>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Resposta em até 30 minutos</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>E-mail</h3>
+                        <a href="mailto:emanuel4837488744@gmail.com">emanuel4837488744@gmail.com</a>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-user"></i>                        <h3>Desenvolvedor</h3>
+                        <p>Emanuel Araújo</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Especialista em Soluções Digitais</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Horário de Atendimento</h3>
+                        <ul class="hours-list">
+                            <li>
+                                <span>Segunda a Sexta</span>
+                                <span>07:00 às 19:00</span>
+                            </li>
+                            <li>
+                                <span>Sábado</span>
+                                <span>08:00 às 18:00</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Quote Form -->
+                <div class="quote-form scroll-reveal" id="orcamento">
+                    <h3>Solicite seu Orçamento</h3>
+                    <p>Preencha o formulário abaixo e escolha como prefere ser atendido</p>
+                    <form id="quoteForm" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="nome">Nome completo *</label>
+                            <input type="text" id="nome" name="nome" required placeholder="Digite seu nome">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefone">Telefone/WhatsApp *</label>
+                            <input type="tel" id="telefone" name="telefone" required placeholder="(00) 00000-0000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tipoNegocio">Tipo de Negócio *</label>
+                            <select id="tipoNegocio" name="tipoNegocio" required>
+                                <option value="">Selecione...</option>
+                                <option value="Comércio/Varejo">Comércio/Varejo</option>
+                                <option value="Prestação de Serviços">Prestação de Serviços</option>
+                                <option value="Restaurante/Lanchonete">Restaurante/Lanchonete</option>
+                                <option value="Profissional Liberal">Profissional Liberal</option>
+                                <option value="Indústria">Indústria</option>
+                                <option value="Outro">Outro</option>                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" placeholder="Descreva seu projeto, necessidades específicas, etc."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Como prefere ser contactado? *</label>
+                            <div class="contact-method">
+                                <div class="contact-method-option">
+                                    <input type="radio" id="whatsapp" name="contato" value="whatsapp" required>
+                                    <label for="whatsapp" class="contact-method-label">
+                                        <i class="fab fa-whatsapp"></i>
+                                        WhatsApp
+                                    </label>
+                                </div>
+                                <div class="contact-method-option">
+                                    <input type="radio" id="email" name="contato" value="email" required>
+                                    <label for="email" class="contact-method-label">
+                                        <i class="fas fa-envelope"></i>
+                                        E-mail
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-submit btn-whatsapp" id="submitBtn">
+                            <i class="fab fa-whatsapp"></i>
+                            Enviar via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-layer-group" style="color: var(--primary);"></i>
+                ZENTRO
+            </div>
+            <p>Soluções digitais que convertem visitantes em clientes</p>
+            <div class="footer-links">
+                <a href="#inicio">Início</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#portfolio">Portfólio</a>                <a href="#contato">Contato</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Zentro - Todos os direitos reservados</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">Desenvolvido por Emanuel Araújo</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5561992560713?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20Zentro" 
+       class="whatsapp-float" 
+       target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Fale conosco!</span>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+
+        // Phone mask
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');                e.target.value = value;
+            }
+        });
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            const formData = {
+                nome: document.getElementById('nome').value,
+                email: document.getElementById('email').value,
+                telefone: document.getElementById('telefone').value,
+                tipoNegocio: document.getElementById('tipoNegocio').value,
+                mensagem: document.getElementById('mensagem').value,
+                contato: document.querySelector('input[name="contato"]:checked').value
+            };
+
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (formData.contato === 'whatsapp') {
+                const texto = `*Olá! Novo orçamento solicitado via site*\n\n` +
+                    `*Nome:* ${formData.nome}\n` +
+                    `*Email:* ${formData.email}\n` +
+                    `*Telefone:* ${formData.telefone}\n` +
+                    `*Tipo de Negócio:* ${formData.tipoNegocio}\n` +
+                    `*Mensagem:* ${formData.mensagem || 'Não informada'}`;
+                
+                const whatsappUrl = `https://wa.me/5561992560713?text=${encodeURIComponent(texto)}`;
+                window.open(whatsappUrl, '_blank');
+                
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Redirecionando...';
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Enviar via WhatsApp';
+                }, 2000);
+                
+            } else {
+                const subject = `Novo Orçamento - ${formData.tipoNegocio}`;
+                const body = `Nome: ${formData.nome}\n` +
+                    `Email: ${formData.email}\n` +
+                    `Telefone: ${formData.telefone}\n` +
+                    `Tipo de Negócio: ${formData.tipoNegocio}\n` +
+                    `Mensagem: ${formData.mensagem || 'Não informada'}`;
+                
+                const mailtoUrl = `mailto:emanuel4837488744@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                window.location.href = mailtoUrl;
+                
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Abrindo e-mail...';
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-envelope"></i> Enviar por E-mail';
+                }, 2000);            }
+            
+            // Update button based on selection
+            const contactMethod = document.querySelector('input[name="contato"]:checked');
+            if (contactMethod) {
+                if (contactMethod.value === 'whatsapp') {
+                    submitBtn.className = 'btn btn-submit btn-whatsapp';
+                    submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Enviar via WhatsApp';
+                } else {
+                    submitBtn.className = 'btn btn-submit btn-email';
+                    submitBtn.innerHTML = '<i class="fas fa-envelope"></i> Enviar por E-mail';
+                }
+            }
+        }
+
+        // Update button text when contact method changes
+        document.querySelectorAll('input[name="contato"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const submitBtn = document.getElementById('submitBtn');
+                if (this.value === 'whatsapp') {
+                    submitBtn.className = 'btn btn-submit btn-whatsapp';
+                    submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Enviar via WhatsApp';
+                } else {
+                    submitBtn.className = 'btn btn-submit btn-email';
+                    submitBtn.innerHTML = '<i class="fas fa-envelope"></i> Enviar por E-mail';
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.background = 'white';
+                navLinks.style.padding = '2rem';
+                navLinks.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            }
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation delay to feature cards
+        document.querySelectorAll('.feature-card, .portfolio-item, .differential-card').forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>
