@@ -2547,7 +2547,9 @@
             const faqItem = button.parentElement;
             const isActive = faqItem.classList.contains('active');
 
-          
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
             });
 
             // Toggle current FAQ
